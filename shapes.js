@@ -1,3 +1,7 @@
+// by Kristin Henry, @KristinHenry, 2014
+//
+// font-families supported: serif, sans-serif, and monospace
+//
 
 
 // Define Line class with 
@@ -195,4 +199,128 @@ Circle.prototype.draw = function(targ){
 
 //------------------------------------------------
 
+// `Rectangle`: cx, cy, center, width, height, stroke, strokeWidth, fill
+// `Square`: cx, cy, center, width, height, stroke, strokeWidth, fill
+
+
+
+// `Text`: 
+//------------------------------------------------
+// Define Text class with 
+// Properties/Methods: x, y, text
+// and Draw(svg) Method
+// 
+function Text(){
+	this.init();
+}
+
+Text.prototype.init = function(){
+
+	this._x = 0;
+	this._y = 0;
+	this._text = 'text';
+	this._fill = 'black';
+	this._textAnchor = 'end';
+	this._fontFamily = 'sans-serif';
+	this._fontSize = '12';
+	return this;
+};
+
+Text.prototype.x = function(x) {
+	if(arguments.length > 0){
+		this._x = x;
+		return this;
+	} else {
+		return this._x;
+	}
+};	
+
+Text.prototype.y = function(y) {
+	if(arguments.length > 0){
+		this._y = y;
+		return this;
+	} else {
+		return this._y;
+	}
+};	
+
+Text.prototype.text = function(text) {
+	if(arguments.length > 0){
+		this._text = text;
+		return this;
+	} else {
+		return this._text;
+	}
+};
+
+Text.prototype.fill = function(fill) {
+	if(arguments.length > 0){
+		this._fill = fill;
+		return this;
+	} else {
+		return this._fill;
+	}
+};	
+
+Text.prototype.textAnchor = function(textAnchor) {
+	if(arguments.length > 0){
+
+		this._textAnchor = 'end';
+
+		if(textAnchor == 'middle'){
+		  	this._textAnchor = 'middle';
+
+		 } else if(textAnchor == 'start'){
+		 	this._textAnchor = 'start';
+		} 
+
+		return this;
+	} else {
+		console.log("anchor out: " + this._textAnchor);
+		return this._textAnchor;
+	}
+};	
+
+Text.prototype.fontSize = function(fontSize) {
+	if(arguments.length > 0){
+		this._fontSize = fontSize;
+		return this;
+	} else {
+		return this._fontSize;
+	}
+};	
+
+Text.prototype.fontFamily = function(fontFamily) {
+	if(arguments.length > 0){
+
+		this._fontFamily = 'sans-serif';
+
+		if(fontFamily == 'serif'){
+			this._fontFamily = 'serif';
+		} else if(fontFamily == 'monospace') {
+			this._fontFamily = 'monospace';
+		}
+
+		return this;
+	} else {
+		return this._fontFamily;
+	}
+};
+
+Text.prototype.draw = function(targ){
+
+	var svgDocument = targ.ownerDocument;
+    var shape = svgDocument.createElementNS("http://www.w3.org/2000/svg", "text");
+    shape.setAttributeNS(null, "x", this.x());
+    shape.setAttributeNS(null, "y", this.y());
+    shape.setAttributeNS(null, "fill", this.fill());
+    shape.setAttributeNS(null, "text-anchor", this.textAnchor());
+    shape.setAttributeNS(null, "font-family", this.fontFamily());
+    shape.setAttributeNS(null, "font-size", this.fontSize());
+
+    var textNode = document.createTextNode(this.text());
+	shape.appendChild(textNode);
+
+    targ.appendChild(shape);
+};
 

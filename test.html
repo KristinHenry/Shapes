@@ -9,7 +9,8 @@
 <svg id="mySVG" width="500" height="100">
 </svg>
 <script>
-//var targ = document.getElementsByTagName('mySVG')[0]; //Get svg element
+
+
 var targ = document.getElementById("mySVG");
 console.log(targ);
 var c = new Circle().stroke('purple').center(20, 30);
@@ -17,9 +18,13 @@ c.draw(targ);
 
 var l = new Line().stroke('black').x1(0).y1(0).x2(100).y2(200);
 l.draw(targ);
+
+
+var t = new Text().x(50).y(50).textAnchor('start');
+t.draw(targ);
+
+
 </script>
-
-
 
 
 
