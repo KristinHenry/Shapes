@@ -197,14 +197,237 @@ Circle.prototype.draw = function(targ){
     targ.appendChild(shape);
 };
 
-//------------------------------------------------
 
 // `Rectangle`: cx, cy, center, width, height, stroke, strokeWidth, fill
+//------------------------------------------------
+// Define Square class with 
+// Properties/Methods: cx, cy, center, width, height, stroke, strokeWidth, fill
+// and Draw(svg) Method
+// 
+
+function Rectangle(){
+	this.init();
+}
+
+Rectangle.prototype.init = function(){
+
+	this._cx = 0;
+	this._cy = 0;
+	this._center = [0,0];
+	this._width = 10;
+	this._height = 20;
+	this._stroke = 'black';
+	this._strokeWidth = 1;
+	this._fill = 'white';
+	return this;
+};
+
+Rectangle.prototype.cx = function(cx) {
+	if(arguments.length > 0){
+		this._cx = cx;
+		return this;
+	} else {
+		return this._cx;
+	}
+};	
+
+Rectangle.prototype.cy = function(cy) {
+	if(arguments.length > 0){
+		this._cy = cy;
+		return this;
+	} else {
+		return this._cy;
+	}
+};
+
+Rectangle.prototype.center = function(center) {
+	if(arguments.length > 0){
+		this._center = [arguments[0], arguments[1]];
+		this._cx = this._center[0];
+		this._cy = this._center[1];
+		for(var i = 0; i< arguments.length; i++){
+			console.log("center: " + arguments[i]);
+		}
+		return this;
+	} else {
+		return this._center;
+	}
+};
+
+Rectangle.prototype.width = function(width) {
+	if(arguments.length > 0){
+		this._width = width;
+		return this;
+	} else {
+		return this._width;
+	}
+};
+
+Rectangle.prototype.height = function(height) {
+	if(arguments.length > 0){
+		this._height = height;
+		return this;
+	} else {
+		return this._height;
+	}
+};
+
+Rectangle.prototype.stroke = function(stroke) {
+	if(arguments.length > 0){
+		//console.log("stroke: " + stroke);
+		this._stroke = stroke;
+		return this;
+	} else {
+		return this._stroke;
+	}
+};
+
+Rectangle.prototype.strokeWidth = function(strokeWidth){
+	if(arguments.length > 0){
+		this._strokeWidth = strokeWidth;
+		return this;
+	} else {
+		return this._strokeWidth;
+	}
+};
+
+Rectangle.prototype.fill = function(fill){
+	if(arguments.length > 0){
+		this._fill = fill;
+		return this;
+	} else {
+		return this._fill;
+	}
+};
+
+Rectangle.prototype.draw = function(targ){
+	//ToDo:  Need to figout out if I need to offset center, so that input sets upper left corner
+	// of square's bounding box????
+
+	var svgDocument = targ.ownerDocument;
+    var shape = svgDocument.createElementNS("http://www.w3.org/2000/svg", "rect");
+    shape.setAttributeNS(null, "x", this.cx());
+    shape.setAttributeNS(null, "y", this.cy());
+    shape.setAttributeNS(null, "width", this.width());
+    shape.setAttributeNS(null, "height", this.height());
+    shape.setAttributeNS(null, "fill", this.fill());
+    shape.setAttributeNS(null, "stroke", this.stroke());
+    shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
+
+    targ.appendChild(shape);
+};
+
+
 // `Square`: cx, cy, center, width, height, stroke, strokeWidth, fill
+//------------------------------------------------
+// Define Square class with 
+// Properties/Methods: cx, cy, center, width, height, stroke, strokeWidth, fill
+// and Draw(svg) Method
+// 
+function Square(){
+	this.init();
+}
+
+Square.prototype.init = function(){
+
+	this._cx = 0;
+	this._cy = 0;
+	this._center = [0,0];
+	this._width = 10;
+	this._height = this._width;
+	this._stroke = 'black';
+	this._strokeWidth = 1;
+	this._fill = 'white';
+	return this;
+};
+
+Square.prototype.cx = function(cx) {
+	if(arguments.length > 0){
+		this._cx = cx;
+		return this;
+	} else {
+		return this._cx;
+	}
+};	
+
+Square.prototype.cy = function(cy) {
+	if(arguments.length > 0){
+		this._cy = cy;
+		return this;
+	} else {
+		return this._cy;
+	}
+};
+
+Square.prototype.center = function(center) {
+	if(arguments.length > 0){
+		this._center = [arguments[0], arguments[1]];
+		this._cx = this._center[0];
+		this._cy = this._center[1];
+		for(var i = 0; i< arguments.length; i++){
+			console.log("center: " + arguments[i]);
+		}
+		return this;
+	} else {
+		return this._center;
+	}
+};
+
+Square.prototype.width = function(width) {
+	if(arguments.length > 0){
+		this._width = width;
+		return this;
+	} else {
+		return this._width;
+	}
+};
+
+Square.prototype.stroke = function(stroke) {
+	if(arguments.length > 0){
+		//console.log("stroke: " + stroke);
+		this._stroke = stroke;
+		return this;
+	} else {
+		return this._stroke;
+	}
+};
+
+Square.prototype.strokeWidth = function(strokeWidth){
+	if(arguments.length > 0){
+		this._strokeWidth = strokeWidth;
+		return this;
+	} else {
+		return this._strokeWidth;
+	}
+};
+
+Square.prototype.fill = function(fill){
+	if(arguments.length > 0){
+		this._fill = fill;
+		return this;
+	} else {
+		return this._fill;
+	}
+};
+
+Square.prototype.draw = function(targ){
+	//ToDo:  Need to figout out if I need to offset center, so that input sets upper left corner
+	// of square's bounding box????
+
+	var svgDocument = targ.ownerDocument;
+    var shape = svgDocument.createElementNS("http://www.w3.org/2000/svg", "rect");
+    shape.setAttributeNS(null, "x", this.cx());
+    shape.setAttributeNS(null, "y", this.cy());
+    shape.setAttributeNS(null, "width", this.width());
+    shape.setAttributeNS(null, "height", this.width());
+    shape.setAttributeNS(null, "fill", this.fill());
+    shape.setAttributeNS(null, "stroke", this.stroke());
+    shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
+
+    targ.appendChild(shape);
+};
 
 
-
-// `Text`: 
 //------------------------------------------------
 // Define Text class with 
 // Properties/Methods: x, y, text
