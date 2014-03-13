@@ -1,0 +1,27 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script src="shapes.js">
+</script>
+</head>
+<body>
+<!-- <input type="button" onclick="popup()" value="Click Me!"> -->
+<svg id="mySVG" width="500" height="100">
+    <rect id="rect1" x="10" y="10" width="50" height="80"
+          style="stroke:#000000; fill:none;"/>
+    <circle cx="25" cy="25" r="20" fill="red"/>
+</svg>
+<script>
+//var targ = document.getElementsByTagName('mySVG')[0]; //Get svg element
+var targ = document.getElementById("mySVG");
+console.log(targ);
+var c = new Circle().stroke('purple').center(20, 30);
+c.draw(targ);
+</script>
+
+
+
+
+
+</body>
+</html>
