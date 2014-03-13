@@ -15,7 +15,7 @@ Line.prototype.init = function(){
 	this._x2 = 100;
 	this._y2 = 100;
 	this._stroke = 'black';
-	this._strokeWidth = 10;
+	this._strokeWidth = 1;
 	return this;
 };
 
@@ -74,9 +74,18 @@ Line.prototype.strokeWidth = function(strokeWidth){
 	}
 };
 
-Line.prototype.draw = function(target){
-	//ToDo
-}
+Line.prototype.draw = function(targ){
+	var svgDocument = targ.ownerDocument;
+    var shape = svgDocument.createElementNS("http://www.w3.org/2000/svg", "line");
+    shape.setAttributeNS(null, "x1", this.x1());
+    shape.setAttributeNS(null, "y1", this.y1());
+    shape.setAttributeNS(null, "x2",  this.x2());
+    shape.setAttributeNS(null, "y2",  this.y2());
+    shape.setAttributeNS(null, "stroke", this.stroke());
+    shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
+
+    targ.appendChild(shape);
+};
 
 //------------------------------------------------
 // Define Circle class with 
@@ -94,7 +103,7 @@ Circle.prototype.init = function(){
 	this._center = [0,0];
 	this._width = 20;
 	this._stroke = 'black';
-	this._strokeWidth = 10;
+	this._strokeWidth = 1;
 	this._fill = 'grey'
 	return this;
 };
@@ -178,26 +187,12 @@ Circle.prototype.draw = function(targ){
     shape.setAttributeNS(null, "cy", this.cy());
     shape.setAttributeNS(null, "r",  this.width()/2);
     shape.setAttributeNS(null, "fill", this.fill());
+    shape.setAttributeNS(null, "stroke", this.stroke());
+    shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
 
     targ.appendChild(shape);
-}
+};
 
 //------------------------------------------------
 
 
-function popup() {
-	var l = new Line().stroke('purple');
-	//l.stroke('purple');
-	l.x1(3);
-	l.y1(30);
-	l.x2(200);
-	l.stroke('red');
-
-alert("Color:  " + l.stroke() +"\n "
-	+ "x1: " + l.x1() + "\n"
-	+ "y1: " + l.y1() + "\n"
-	+ "x2: " + l.x2() + "\n"
-	+ "y2: " + l.y2() + "\n"
-	+ "strokeWidth: " + l.strokeWidth() + "\n")
-	
-}
