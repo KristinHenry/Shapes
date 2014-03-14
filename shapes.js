@@ -106,8 +106,8 @@ Circle.prototype.init = function(){
 	this._cy = 0;
 	this._center = [0,0];
 	this._width = 20;
-	this._stroke = 'black';
-	this._strokeWidth = 1;
+	this._stroke = null;
+	this._strokeWidth = null;
 	this._fill = 'grey'
 	return this;
 };
@@ -216,11 +216,24 @@ Rectangle.prototype.init = function(){
 	this._center = [0,0];
 	this._width = 10;
 	this._height = 20;
-	this._stroke = 'black';
-	this._strokeWidth = 1;
+	this._x = 5;
+	this._y = 10;
+	this._stroke = null;
+	this._strokeWidth = null;
 	this._fill = 'white';
 	return this;
 };
+
+Rectangle.prototype.x = function(){
+
+	this._x = this._cx - (this._width/2);
+	return this._x;
+}
+
+Rectangle.prototype.y = function(){
+	this._y = this._cy - (this._height/2);
+	return this._y;
+}
 
 Rectangle.prototype.cx = function(cx) {
 	if(arguments.length > 0){
@@ -306,8 +319,8 @@ Rectangle.prototype.draw = function(targ){
 
 	var svgDocument = targ.ownerDocument;
     var shape = svgDocument.createElementNS("http://www.w3.org/2000/svg", "rect");
-    shape.setAttributeNS(null, "x", this.cx());
-    shape.setAttributeNS(null, "y", this.cy());
+    shape.setAttributeNS(null, "x", this.x()); //this.cx());
+    shape.setAttributeNS(null, "y", this.y()); //this.cy());
     shape.setAttributeNS(null, "width", this.width());
     shape.setAttributeNS(null, "height", this.height());
     shape.setAttributeNS(null, "fill", this.fill());
@@ -333,13 +346,26 @@ Square.prototype.init = function(){
 	this._cx = 0;
 	this._cy = 0;
 	this._center = [0,0];
-	this._width = 10;
-	this._height = this._width;
-	this._stroke = 'black';
-	this._strokeWidth = 1;
+	this._x = -10;
+	this._y = -10;
+	this._width = 30;
+	this._height = 30;
+	this._stroke = null;
+	this._strokeWidth = null;
 	this._fill = 'white';
 	return this;
 };
+
+Square.prototype.x = function(){
+
+	this._x = this._cx - (this._width/2);
+	return this._x;
+}
+
+Square.prototype.y = function(){
+	this._y = this._cy - (this._height/2);
+	return this._y;
+}
 
 Square.prototype.cx = function(cx) {
 	if(arguments.length > 0){
@@ -376,9 +402,20 @@ Square.prototype.center = function(center) {
 Square.prototype.width = function(width) {
 	if(arguments.length > 0){
 		this._width = width;
+		this._height = width;
 		return this;
 	} else {
 		return this._width;
+	}
+};
+
+Square.prototype.height = function(height) {
+	if(arguments.height > 0){
+		this._height = height;
+		this._width = height;
+		return this;
+	} else {
+		return this._height;
 	}
 };
 
@@ -416,10 +453,10 @@ Square.prototype.draw = function(targ){
 
 	var svgDocument = targ.ownerDocument;
     var shape = svgDocument.createElementNS("http://www.w3.org/2000/svg", "rect");
-    shape.setAttributeNS(null, "x", this.cx());
-    shape.setAttributeNS(null, "y", this.cy());
+    shape.setAttributeNS(null, "x", this.x()); //this.cx());
+    shape.setAttributeNS(null, "y", this.y()); //this.cy());
     shape.setAttributeNS(null, "width", this.width());
-    shape.setAttributeNS(null, "height", this.width());
+    shape.setAttributeNS(null, "height", this.height());
     shape.setAttributeNS(null, "fill", this.fill());
     shape.setAttributeNS(null, "stroke", this.stroke());
     shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
