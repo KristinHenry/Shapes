@@ -1,9 +1,10 @@
+//
 // by Kristin Henry, @KristinHenry, 2014
 //
 // font-families supported: serif, sans-serif, and monospace
 //
 
-
+//------------------------------------------------
 // Define Line class with 
 // Properties/Methods: x1, y1, x2, y2, stroke, strokeWidth
 // and Draw(svg) Method
@@ -63,7 +64,6 @@ Line.prototype.y2 = function(y2) {
 
 Line.prototype.stroke = function(stroke) {
 	if(arguments.length > 0){
-		//console.log("stroke: " + stroke);
 		this._stroke = stroke;
 		return this;
 	} else {
@@ -94,6 +94,7 @@ Line.prototype.draw = function(targ){
 
     return this;
 };
+
 
 //------------------------------------------------
 // Define Circle class with 
@@ -159,7 +160,6 @@ Circle.prototype.width = function(width) {
 
 Circle.prototype.stroke = function(stroke) {
 	if(arguments.length > 0){
-		//console.log("stroke: " + stroke);
 		this._stroke = stroke;
 		return this;
 	} else {
@@ -186,8 +186,6 @@ Circle.prototype.fill = function(fill){
 };
 
 Circle.prototype.draw = function(targ){
-	//ToDo:  Need to figout out if I need to offset center, so that input sets upper left corner
-	// of circle's bounding box????
 
 	var svgDocument = targ.ownerDocument;
     var shape = svgDocument.createElementNS("http://www.w3.org/2000/svg", "circle");
@@ -204,9 +202,8 @@ Circle.prototype.draw = function(targ){
 };
 
 
-// `Rectangle`: cx, cy, center, width, height, stroke, strokeWidth, fill
 //------------------------------------------------
-// Define Square class with 
+// Define Rectangle class with 
 // Properties/Methods: cx, cy, center, width, height, stroke, strokeWidth, fill
 // and Draw(svg) Method
 // 
@@ -231,7 +228,6 @@ Rectangle.prototype.init = function(){
 };
 
 Rectangle.prototype.x = function(){
-
 	this._x = this._cx - (this._width/2);
 	return this._x;
 }
@@ -293,7 +289,6 @@ Rectangle.prototype.height = function(height) {
 
 Rectangle.prototype.stroke = function(stroke) {
 	if(arguments.length > 0){
-		//console.log("stroke: " + stroke);
 		this._stroke = stroke;
 		return this;
 	} else {
@@ -320,13 +315,11 @@ Rectangle.prototype.fill = function(fill){
 };
 
 Rectangle.prototype.draw = function(targ){
-	//ToDo:  Need to figout out if I need to offset center, so that input sets upper left corner
-	// of square's bounding box????
-
+	
 	var svgDocument = targ.ownerDocument;
     var shape = svgDocument.createElementNS("http://www.w3.org/2000/svg", "rect");
-    shape.setAttributeNS(null, "x", this.x()); //this.cx());
-    shape.setAttributeNS(null, "y", this.y()); //this.cy());
+    shape.setAttributeNS(null, "x", this.x()); 
+    shape.setAttributeNS(null, "y", this.y()); 
     shape.setAttributeNS(null, "width", this.width());
     shape.setAttributeNS(null, "height", this.height());
     shape.setAttributeNS(null, "fill", this.fill());
@@ -339,7 +332,6 @@ Rectangle.prototype.draw = function(targ){
 };
 
 
-// `Square`: cx, cy, center, width, height, stroke, strokeWidth, fill
 //------------------------------------------------
 // Define Square class with 
 // Properties/Methods: cx, cy, center, width, height, stroke, strokeWidth, fill
@@ -429,7 +421,6 @@ Square.prototype.height = function(height) {
 
 Square.prototype.stroke = function(stroke) {
 	if(arguments.length > 0){
-		//console.log("stroke: " + stroke);
 		this._stroke = stroke;
 		return this;
 	} else {
@@ -456,13 +447,11 @@ Square.prototype.fill = function(fill){
 };
 
 Square.prototype.draw = function(targ){
-	//ToDo:  Need to figout out if I need to offset center, so that input sets upper left corner
-	// of square's bounding box????
 
 	var svgDocument = targ.ownerDocument;
     var shape = svgDocument.createElementNS("http://www.w3.org/2000/svg", "rect");
-    shape.setAttributeNS(null, "x", this.x()); //this.cx());
-    shape.setAttributeNS(null, "y", this.y()); //this.cy());
+    shape.setAttributeNS(null, "x", this.x()); 
+    shape.setAttributeNS(null, "y", this.y()); 
     shape.setAttributeNS(null, "width", this.width());
     shape.setAttributeNS(null, "height", this.height());
     shape.setAttributeNS(null, "fill", this.fill());
