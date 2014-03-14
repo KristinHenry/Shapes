@@ -24,10 +24,12 @@ Line.prototype.init = function(){
 };
 
 Line.prototype.x1 = function(x1) {
+	console.log("x1: " + this._x1);
 	if(arguments.length > 0){
 		this._x1 = x1;
 		return this;
 	} else {
+		console.log("return x1: " + this._x1);
 		return this._x1;
 	}
 };
@@ -89,6 +91,8 @@ Line.prototype.draw = function(targ){
     shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
 
     targ.appendChild(shape);
+
+    return this;
 };
 
 //------------------------------------------------
@@ -195,6 +199,8 @@ Circle.prototype.draw = function(targ){
     shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
 
     targ.appendChild(shape);
+
+    return this;
 };
 
 
@@ -328,6 +334,8 @@ Rectangle.prototype.draw = function(targ){
     shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
 
     targ.appendChild(shape);
+
+    return this;
 };
 
 
@@ -462,6 +470,8 @@ Square.prototype.draw = function(targ){
     shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
 
     targ.appendChild(shape);
+
+    return this;
 };
 
 
@@ -480,7 +490,7 @@ Text.prototype.init = function(){
 	this._y = 0;
 	this._text = 'text';
 	this._fill = 'black';
-	this._textAnchor = 'end';
+	this._textAnchor = 'start';
 	this._fontFamily = 'sans-serif';
 	this._fontSize = '12';
 	return this;
@@ -582,5 +592,7 @@ Text.prototype.draw = function(targ){
 	shape.appendChild(textNode);
 
     targ.appendChild(shape);
+
+    return this;
 };
 
