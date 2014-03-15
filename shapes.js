@@ -25,12 +25,11 @@ Line.prototype.init = function(){
 };
 
 Line.prototype.x1 = function(x1) {
-	//console.log("x1: " + this._x1);
+	
 	if(arguments.length > 0){
 		this._x1 = x1;
 		return this;
 	} else {
-		//console.log("return x1: " + this._x1);
 		return this._x1;
 	}
 };
@@ -140,9 +139,7 @@ Circle.prototype.center = function(center) {
 		this._center = [arguments[0], arguments[1]];
 		this._cx = this._center[0];
 		this._cy = this._center[1];
-		// for(var i = 0; i< arguments.length; i++){
-		// 	console.log("center: " + arguments[i]);
-		// }
+		
 		return this;
 	} else {
 		return this._center;
@@ -263,9 +260,7 @@ Rectangle.prototype.center = function(center) {
 		this._center = [arguments[0], arguments[1]];
 		this._cx = this._center[0];
 		this._cy = this._center[1];
-		// for(var i = 0; i< arguments.length; i++){
-		// 	console.log("center: " + arguments[i]);
-		// }
+		
 		return this;
 	} else {
 		return this._center;
@@ -396,9 +391,7 @@ Square.prototype.center = function(center) {
 		this._center = [arguments[0], arguments[1]];
 		this._cx = this._center[0];
 		this._cy = this._center[1];
-		// for(var i = 0; i< arguments.length; i++){
-		// 	console.log("center: " + arguments[i]);
-		// }
+		
 		return this;
 	} else {
 		return this._center;
@@ -544,7 +537,6 @@ Text.prototype.textAnchor = function(textAnchor) {
 
 		return this;
 	} else {
-		// console.log("anchor out: " + this._textAnchor);
 		return this._textAnchor;
 	}
 };	

@@ -2,36 +2,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <script src="shapes.js"></script>
-
-<!-- <script src="jquery-csv.js"></script> -->
-<!-- <script src="jquery-1.10.2.min.js"></script> -->
-<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
 <script src="co2.js"></script> 
-
-<script>
-// load data from external file
-
-console.log(co2);
-
-// var result = $.csv.toArrays("data/co2.txt");
-// console.log(result);
-</script>
-
 </head>
+
 <body>
-<!-- <input type="button" onclick="popup()" value="Click Me!"> -->
+<h1 style="font-family:arial;">Basic Data Visualization, of CO2 levels over time<h1>
 <svg id="mySVG" width="1000" height="800">
 </svg>
 
 
 <script>
 
-console.log("Testing ---------------------------------------");
-
 // restructure data for easy looping while drawing graph
 var data = {};
 var keys = [];
-
 
 for(var i=0; i< co2.length; i++){
 	var year = co2[i].date.substr(0,4);
@@ -66,21 +50,13 @@ for(var i=0; i<numKeys; i++){
 	}
 }
 
-console.log("minVal " + minVal);
-console.log("maxVal " + maxVal);
-
-
-
-
-var chartWidth = 800;
-var chartHeight = 500;
-var xgap = 60;
-
 
 // Create svg object for chart
 var targ = document.getElementById("mySVG");
 
-
+var chartWidth = 800;
+var chartHeight = 500;
+var xgap = 60;
 
 // draw X axis and labels
 //var axisX = new Line().x1(60).y1(chartHeight).x2(chartWidth).y2(chartHeight).draw(targ);
@@ -89,7 +65,6 @@ var labelsX = ['J','F','M','A','M','J','J','A','S','O','N','D'];
 var xlab = 0;
 for(var i=0; i<labelsX.length; i++){
 	xlab += xgap;
-	//new Text().x(xlab).y(chartHeight + 20).text(labelsX[i]).draw(targ);
 	new Text().x(xlab).y(10).text(labelsX[i]).textAnchor('middle').fill('#808080').draw(targ);
 }
 
@@ -107,25 +82,21 @@ for(var i= 0; i<ticValues.length; i++){
 }
 
 
-
 // draw data
 var cID = 0;
 var colors = ['#008080','#CCCCCC','#90EE90', '#4B0082','#778899', '#808080', '#8FBC8F'];
-
 var ends = [];
 
 for(var i=0; i<numKeys; i++){
 
-	//ToDo: color each year, so it's easier to diferentiate when lines positioned closely
-
+	// rotate through color options
 	var color = colors[cID];
 	if(cID < colors.length -1){
 		cID += 1;
 	} else {
 		cID = 0;
 	}
-	console.log("color: " + color);
-
+	
 	var levs = data[keys[i]];
 
 	var x1 = 0;
@@ -134,7 +105,7 @@ for(var i=0; i<numKeys; i++){
 	for(var j=0; j<12; j++){
 		
 		x1 += xgap;
-		y1 = chartHeight - (levs[j] -300)*10 + 100; //-100;
+		y1 = chartHeight - (levs[j] -300)*10 + 100; 
 		//var c = new Circle().fill('red').cx(x1).cy(y1).width(2).draw(targ);
 		if(j>0){
 			new Line().x1(x1).y1(y1).x2(x2).y2(y2).stroke(color).draw(targ);	
@@ -149,7 +120,7 @@ for(var i=0; i<numKeys; i++){
 }
 
 
-// add nudged year labes, so that they don't overlap
+// add year labes, nudged so that they don't overlap
 cID = 0;
 for(var i=0; i<numKeys; i++){
 
