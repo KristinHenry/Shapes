@@ -1,0 +1,132 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script src="shapes.js"></script>
+
+<!-- <script src="jquery-csv.js"></script> -->
+<!-- <script src="jquery-1.10.2.min.js"></script> -->
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+<script src="co2.js"></script> 
+
+<script>
+// load data from external file
+
+console.log(co2);
+
+// var result = $.csv.toArrays("data/co2.txt");
+// console.log(result);
+</script>
+
+</head>
+<body>
+<!-- <input type="button" onclick="popup()" value="Click Me!"> -->
+<svg id="mySVG" width="1000" height="800">
+</svg>
+
+
+<script>
+
+console.log("Testing ---------------------------------------");
+
+// restructure data for easy looping while drawing graph
+var data = {};
+var keys = [];
+
+
+for(var i=0; i< co2.length; i++){
+	var year = co2[i].date.substr(0,4);
+	var month = co2[i].date.substr(5,2);
+
+	if(!data.hasOwnProperty(year)){
+		data[year] = [0,0,0,0,0,0,0,0,0,0,0,0];
+		keys.push(year);
+	}
+
+	data[year][month -1] = co2[i].level;
+}
+
+// make sure keys are sorted by date
+keys.sort();
+var numKeys = keys.length;
+
+
+//get min and max values from data set
+var minVal = 999999;
+var maxVal = 0;
+for(var i=0; i<numKeys; i++){
+
+	var levs = data[keys[i]];
+	for(var j=0; j<levs.length; j++){
+		if(minVal > levs[j]){
+			minVal = levs[j];
+		}
+		if(maxVal < levs[j]){
+			maxVal = levs[j];
+		}
+	}
+}
+
+console.log("minVal " + minVal);
+console.log("maxVal " + maxVal);
+
+
+
+
+var chartWidth = 800;
+var chartHeight = 500;
+var xgap = 60;
+
+
+// Create svg object for chart
+var targ = document.getElementById("mySVG");
+
+
+
+// draw X axis and labels
+var axisX = new Line().x1(60).y1(chartHeight).x2(chartWidth).y2(chartHeight).draw(targ);
+var labelsX = ['J','F','M','A','M','J','J','A','S','O','N','D'];
+
+var xlab = 0;
+for(var i=0; i<labelsX.length; i++){
+	xlab += xgap;
+	new Text().x(xlab).y(chartHeight + 20).text(labelsX[i]).draw(targ);
+}
+
+
+// draw Y axis and labels
+var axisY = new Line().x1(xgap).y1(0).x2(xgap).y2(chartHeight).draw(targ);
+
+
+
+// draw data
+for(var i=0; i<numKeys; i++){
+
+	var levs = data[keys[i]];
+
+	var x1 = 0;
+	var x2 = 0;
+	var y2 = 0;
+	for(var j=0; j<12; j++){
+		
+		x1 += xgap;
+		y1 = chartHeight - (levs[j] -300)*10 + 100; //-100;
+		var c = new Circle().fill('red').cx(x1).cy(y1).width(2).draw(targ);
+		if(j>0){
+			new Line().x1(x1).y1(y1).x2(x2).y2(y2).stroke('black').draw(targ);	
+		}
+
+		x2 = x1;
+		y2 = y1;
+	}
+
+	new Text().x(x2 + xgap).y(y2).textAnchor('start').text(keys[i]).fontSize(10).draw(targ);
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>

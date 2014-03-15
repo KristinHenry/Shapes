@@ -25,12 +25,12 @@ Line.prototype.init = function(){
 };
 
 Line.prototype.x1 = function(x1) {
-	console.log("x1: " + this._x1);
+	//console.log("x1: " + this._x1);
 	if(arguments.length > 0){
 		this._x1 = x1;
 		return this;
 	} else {
-		console.log("return x1: " + this._x1);
+		//console.log("return x1: " + this._x1);
 		return this._x1;
 	}
 };
@@ -112,7 +112,7 @@ Circle.prototype.init = function(){
 	this._center = [0,0];
 	this._width = 20;
 	this._stroke = null;
-	this._strokeWidth = null;
+	this._strokeWidth = 1;
 	this._fill = 'grey'
 	return this;
 };
@@ -140,9 +140,9 @@ Circle.prototype.center = function(center) {
 		this._center = [arguments[0], arguments[1]];
 		this._cx = this._center[0];
 		this._cy = this._center[1];
-		for(var i = 0; i< arguments.length; i++){
-			console.log("center: " + arguments[i]);
-		}
+		// for(var i = 0; i< arguments.length; i++){
+		// 	console.log("center: " + arguments[i]);
+		// }
 		return this;
 	} else {
 		return this._center;
@@ -193,8 +193,11 @@ Circle.prototype.draw = function(targ){
     shape.setAttributeNS(null, "cy", this.cy());
     shape.setAttributeNS(null, "r",  this.width()/2);
     shape.setAttributeNS(null, "fill", this.fill());
-    shape.setAttributeNS(null, "stroke", this.stroke());
-    shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
+
+    if(this.stroke()){
+    	shape.setAttributeNS(null, "stroke", this.stroke());
+    	shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
+    }
 
     targ.appendChild(shape);
 
@@ -222,7 +225,7 @@ Rectangle.prototype.init = function(){
 	this._x = 5;
 	this._y = 10;
 	this._stroke = null;
-	this._strokeWidth = null;
+	this._strokeWidth = 1;
 	this._fill = 'white';
 	return this;
 };
@@ -260,9 +263,9 @@ Rectangle.prototype.center = function(center) {
 		this._center = [arguments[0], arguments[1]];
 		this._cx = this._center[0];
 		this._cy = this._center[1];
-		for(var i = 0; i< arguments.length; i++){
-			console.log("center: " + arguments[i]);
-		}
+		// for(var i = 0; i< arguments.length; i++){
+		// 	console.log("center: " + arguments[i]);
+		// }
 		return this;
 	} else {
 		return this._center;
@@ -323,8 +326,11 @@ Rectangle.prototype.draw = function(targ){
     shape.setAttributeNS(null, "width", this.width());
     shape.setAttributeNS(null, "height", this.height());
     shape.setAttributeNS(null, "fill", this.fill());
-    shape.setAttributeNS(null, "stroke", this.stroke());
-    shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
+
+    if(this.stroke()){
+    	shape.setAttributeNS(null, "stroke", this.stroke());
+    	shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
+    }
 
     targ.appendChild(shape);
 
@@ -350,8 +356,8 @@ Square.prototype.init = function(){
 	this._y = -10;
 	this._width = 30;
 	this._height = 30;
-	this._stroke = null;
-	this._strokeWidth = null;
+	this._stroke = null; 
+	this._strokeWidth = 1; 
 	this._fill = 'white';
 	return this;
 };
@@ -390,9 +396,9 @@ Square.prototype.center = function(center) {
 		this._center = [arguments[0], arguments[1]];
 		this._cx = this._center[0];
 		this._cy = this._center[1];
-		for(var i = 0; i< arguments.length; i++){
-			console.log("center: " + arguments[i]);
-		}
+		// for(var i = 0; i< arguments.length; i++){
+		// 	console.log("center: " + arguments[i]);
+		// }
 		return this;
 	} else {
 		return this._center;
@@ -455,8 +461,11 @@ Square.prototype.draw = function(targ){
     shape.setAttributeNS(null, "width", this.width());
     shape.setAttributeNS(null, "height", this.height());
     shape.setAttributeNS(null, "fill", this.fill());
-    shape.setAttributeNS(null, "stroke", this.stroke());
-    shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
+
+    if(this.stroke()){
+    	shape.setAttributeNS(null, "stroke", this.stroke());
+    	shape.setAttributeNS(null, "stroke-width", this.strokeWidth());
+    }
 
     targ.appendChild(shape);
 
@@ -535,7 +544,7 @@ Text.prototype.textAnchor = function(textAnchor) {
 
 		return this;
 	} else {
-		console.log("anchor out: " + this._textAnchor);
+		// console.log("anchor out: " + this._textAnchor);
 		return this._textAnchor;
 	}
 };	
