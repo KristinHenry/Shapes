@@ -90,7 +90,7 @@ var xlab = 0;
 for(var i=0; i<labelsX.length; i++){
 	xlab += xgap;
 	//new Text().x(xlab).y(chartHeight + 20).text(labelsX[i]).draw(targ);
-	new Text().x(xlab).y(10).text(labelsX[i]).textAnchor('middle').draw(targ);
+	new Text().x(xlab).y(10).text(labelsX[i]).textAnchor('middle').fill('#808080').draw(targ);
 }
 
 
@@ -103,14 +103,14 @@ for(var i= 0; i<ticValues.length; i++){
 	y = chartHeight - (ticValues[i] - 300)*10 + 100;19781979
 
 	var l = new Line().x1(x).y1(y).x2(x + 3).y2(y).draw(targ);
-	var t = new Text().x(x-2).y(y+5).text(ticValues[i]).textAnchor('end').draw(targ);
+	var t = new Text().x(x-2).y(y+5).text(ticValues[i]).textAnchor('end').fill('#808080').draw(targ);
 }
 
 
 
 // draw data
 var cID = 0;
-var colors = ['#4682B4', '#90EE90', '#4B0082','#778899', '#808080', '#8FBC8F'];
+var colors = ['#008080','#CCCCCC','#90EE90', '#4B0082','#778899', '#808080', '#8FBC8F'];
 
 var ends = [];
 
