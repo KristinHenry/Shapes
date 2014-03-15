@@ -93,12 +93,27 @@ for(var i=0; i<labelsX.length; i++){
 }
 
 
-// draw Y axis and labels
-var axisY = new Line().x1(xgap).y1(0).x2(xgap).y2(chartHeight).draw(targ);
+// draw Y axis labels
+//var axisY = new Line().x1(xgap).y1(0).x2(xgap).y2(chartHeight).draw(targ);
+
+var ticValues = [315, 320, 325, 330, 335, 340, 345, 350, 355];
+
+for(var i= 0; i<ticValues.length; i++){
+	x = xgap - 10;
+	y = chartHeight - (ticValues[i] - 300)*10 + 100;19781979
+
+	//var c = new Circle().fill('blue').cx(x).cy(y).width(3).draw(targ);
+
+	var l = new Line().x1(x).y1(y).x2(x + 3).y2(y).draw(targ);
+	var t = new Text().x(x-2).y(y+5).text(ticValues[i]).textAnchor('end').draw(targ);
+}
+
+
 
 
 
 // draw data
+var yearLabels = [];
 for(var i=0; i<numKeys; i++){
 
 	var levs = data[keys[i]];
@@ -119,8 +134,14 @@ for(var i=0; i<numKeys; i++){
 		y2 = y1;
 	}
 
-	new Text().x(x2 + xgap).y(y2).textAnchor('start').text(keys[i]).fontSize(10).draw(targ);
+	yearLabels.push(new Text().x(x2 + xgap).y(y2).textAnchor('start').text(keys[i]).fontSize(10).draw(targ));
 }
+
+
+//
+// ToDo: nudge year lables, so that they're not overlapping
+//
+console.log("labels: " + yearLabels[0].y());
 
 
 
