@@ -1,0 +1,127 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script src="shapes.js"></script>
+<script src="co2.js"></script> 
+</head>
+
+<body>
+<h1 style="font-family:arial;">Basic Data Visualization (with one line), of CO2 levels over time<h1>
+<svg id="mySVG" width="1000" height="800">
+</svg>
+
+
+<script>
+
+// restructure data for easy looping while drawing graph
+var data = {};
+var keys = [];
+
+for(var i=0; i< co2.length; i++){
+	var year = co2[i].date.substr(0,4);
+	var month = co2[i].date.substr(5,2);
+
+	if(!data.hasOwnProperty(year)){
+		data[year] = [0,0,0,0,0,0,0,0,0,0,0,0];
+		keys.push(year);
+	}
+
+	data[year][month -1] = co2[i].level;
+}
+
+// make sure keys are sorted by date
+keys.sort();
+var numKeys = keys.length;
+
+
+//get min and max values from data set
+var minVal = 999999;
+var maxVal = 0;
+for(var i=0; i<numKeys; i++){
+
+	var levs = data[keys[i]];
+	for(var j=0; j<levs.length; j++){
+		if(minVal > levs[j]){
+			minVal = levs[j];
+		}
+		if(maxVal < levs[j]){
+			maxVal = levs[j];
+		}
+	}
+}
+
+
+// Create svg object for chart
+var targ = document.getElementById("mySVG");
+
+var chartWidth = 800;
+var chartHeight = 500;
+var xgap = 40; //60;
+
+
+
+
+// draw data
+var x1 = xgap;
+var y1 = 0;
+var dx = 2;
+
+for(var i=0; i<numKeys; i++){
+
+	var color = 'black';  
+	var levs = data[keys[i]];
+
+	for(var j=0; j<12; j++){
+		
+		x1 += dx;
+		y1 = chartHeight - (levs[j] -300)*10 + 100; 
+		//var c = new Circle().fill('red').cx(x1).cy(y1).width(2).draw(targ);
+		if(j>0 || i>0){
+			new Line().x1(x1).y1(y1).x2(x2).y2(y2).stroke(color).draw(targ);	
+		}
+
+		x2 = x1;
+		y2 = y1;
+	}
+}
+
+
+// draw X axis and labels
+//var axisX = new Line().x1(60).y1(chartHeight).x2(chartWidth).y2(chartHeight).draw(targ);
+var labelsX = keys;
+
+var xlab = xgap;
+var ylab = chartHeight -12;
+var skip = 3;
+for(var i=0; i<labelsX.length; i++){
+	if(i % skip === 0){
+	
+		new Text().x(xlab).y(chartHeight).text(labelsX[i]).textAnchor('middle').fill('#808080').fontSize(10).draw(targ);
+	}	
+
+	new Line().x1(xlab).y1(ylab).x2(xlab).y2(ylab-3).draw(targ);
+
+	// update 
+	xlab += 12*dx;
+}
+
+
+// draw Y axis labels
+//var axisY = new Line().x1(xgap).y1(0).x2(xgap).y2(chartHeight).draw(targ);
+var ticValues = [315, 320, 325, 330, 335, 340, 345, 350, 355];
+
+for(var i= 0; i<ticValues.length; i++){
+	x = xgap - 10;
+	y = chartHeight - (ticValues[i] - 300)*10 + 100;19781979
+
+	var l = new Line().x1(x).y1(y).x2(x + 3).y2(y).draw(targ);
+	var t = new Text().x(x-2).y(y+5).text(ticValues[i]).textAnchor('end').fill('#808080').fontSize(10).draw(targ);
+}
+
+
+</script>
+
+
+
+</body>
+</html>
