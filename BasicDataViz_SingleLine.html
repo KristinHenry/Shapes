@@ -29,7 +29,7 @@ for(var i=0; i< co2.length; i++){
 	data[year][month -1] = co2[i].level;
 }
 
-// make sure keys are sorted by date
+// make sure keys are sorted by year
 keys.sort();
 var numKeys = keys.length;
 
@@ -56,9 +56,7 @@ var targ = document.getElementById("mySVG");
 
 var chartWidth = 800;
 var chartHeight = 500;
-var xgap = 40; //60;
-
-
+var xgap = 40; 
 
 
 // draw data
@@ -120,7 +118,6 @@ for(var i= 0; i<ticValues.length; i++){
 
 
 </script>
-
 
 
 </body>
